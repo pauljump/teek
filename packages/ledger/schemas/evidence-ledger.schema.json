@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://teek.dev/schemas/evidence-ledger.schema.json",
+  "title": "Teek v2 evidence ledger",
+  "description": "The inspectable evidence layer beneath a Teek cognitive profile.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "persona", "snapshot_date", "readiness", "sources", "claims", "unknowns", "contradictions"],
+  "properties": {
+    "version": { "const": 2 },
+    "persona": { "type": "string", "minLength": 1 },
+    "snapshot_date": { "type": "string", "format": "date" },
+    "readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["overall", "intended_use", "not_reliable_for"],
+      "properties": {
+        "overall": { "type": "number", "minimum": 0, "maximum": 1 },
+        "intended_use": { "type": "string", "minLength": 1 },
+        "not_reliable_for": { "type": "string", "minLength": 1 }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "url", "title", "published_at", "retrieved_at", "first_party"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^src-[0-9]+$" },
+          "url": { "type": "string", "format": "uri" },
+          "title": { "type": "string", "minLength": 1 },
+          "published_at": { "type": "string", "minLength": 1 },
+          "retrieved_at": { "type": "string", "minLength": 1 },
+          "first_party": { "type": "boolean" },
+          "local_document": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "label", "statement", "period", "status", "confidence", "evidence_source_ids", "excerpt_available", "review_after"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^clm-[0-9]{3}$" },
+          "kind": { "enum": ["decision_rule", "thesis_evolution", "current_attention", "founder_signal"] },
+          "label": { "type": "string", "minLength": 1 },
+          "statement": { "type": "string", "minLength": 1 },
+          "period": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["documented", "attributed", "inferred", "contradicted", "outdated"] },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "evidence_source_ids": { "type": "array", "minItems": 1, "items": { "type": "string", "pattern": "^src-[0-9]+$" } },
+          "excerpt_available": { "type": "boolean" },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["source_id", "excerpt", "local_document"],
+              "properties": {
+                "source_id": { "type": "string", "pattern": "^src-[0-9]+$" },
+                "excerpt": { "type": "string", "minLength": 1 },
+                "local_document": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "review_after": { "type": "string", "format": "date" }
+        }
+      }
+    },
+    "unknowns": { "type": "array", "items": { "type": "string" } },
+    "contradictions": { "type": "array", "items": { "type": "string" } }
+  }
+}
