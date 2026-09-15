@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
+  <title id="title">Teek mark</title>
+  <desc id="desc">An abstract T with three evidence nodes inside a circular profile.</desc>
+  <circle cx="48" cy="48" r="39" fill="#111315" stroke="#e8e6df" stroke-opacity=".32" stroke-width="2"/>
+  <path d="M27 31h42M36 31v31c0 8 5 12 12 12 8 0 14-5 14-15" fill="none" stroke="#e8e6df" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="27" cy="31" r="5" fill="#e9a451"/>
+  <circle cx="69" cy="31" r="5" fill="#8bb7d8"/>
+  <circle cx="48" cy="74" r="5" fill="#e8e6df"/>
+</svg>

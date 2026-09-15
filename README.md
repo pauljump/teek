@@ -1,6 +1,10 @@
 # Teek
 
+<img src="assets/teek-mark.svg" alt="Teek mark" width="96" align="right" />
+
 **How to build a model of someone's mind from their public writing, and prove it works.**
+
+Public site: [teek.polyfeeds.dev](https://teek.polyfeeds.dev/)
 
 Start here: **[How To Build A Model Of Someone's Mind, And Prove It Works](docs/how-to-build-a-mind-model.md)**
 
